@@ -1,43 +1,682 @@
+/* ==================== GOOGLE FONTS & VARIABLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+    --bg-gray: #e0e0e0; /* Light gray background */
+    --bg-dark: #1d1d1d; /* Dark gray for footer/strip */
+    --text-black: #000000;
+    --text-white: #ffffff;
+    --font-head: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* ==================== RESET & BASICS ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-font-family: Arial, sans-serif;
-margin: 40px;
-background: #f9f9f9;
-color: #222;
+    font-family: var(--font-body);
+    background-color: var(--bg-gray);
+    color: var(--text-black);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* ==================== NAVIGATION ==================== */
+.navbar {
+    background-color: #000;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 
-nav {
-display: flex;
-justify-content: space-between;
-align-items: center;
+.logo-img {
+    height: 40px; /* Adjust based on your logo */
+    width: auto;
+    filter: invert(1); /* Inverts black logo to white if needed */
 }
 
-
-nav ul {
-list-style: none;
-display: flex;
-gap: 20px;
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
-
-nav a {
-text-decoration: none;
-font-weight: bold;
-color: #0077cc;
+/* 1. General Style for ALL links (About, Skills, Portfolio, Resume) */
+.nav-links a {
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative; /* Needed for the underline effect */
+    padding: 5px 0;
 }
 
-
-.hero {
-margin-top: 80px;
+/* 2. Hover Effect for Standard Links (Underline animation) */
+/* This targets every link EXCEPT the contact button */
+.nav-links a:not(.btn-contact)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transition: width 0.3s;
 }
 
-
-.btn {
-display: inline-block;
-margin-top: 20px;
-padding: 10px 20px;
-background: #0077cc;
-color: white;
-text-decoration: none;
-border-radius: 6px;
+.nav-links a:not(.btn-contact):hover::after {
+    width: 100%; /* Line grows from 0 to 100% on hover */
 }
+
+/* 3. Special Style for CONTACT ME Button (Your requested style) */
+.nav-links .btn-contact {
+    /* No border, no background initially */
+    background-color: transparent; 
+    padding: 10px 25px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    /* Reset the padding from general links so the button looks right */
+    margin-left: 10px; 
+}
+
+/* Hover Effect for CONTACT ME */
+.nav-links .btn-contact:hover {
+    background-color: #fff; /* Turns white */
+    color: #000;            /* Text turns black */
+}
+
+/* Burger Menu (Hidden on Desktop) */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+}
+
+/* ==================== HERO SECTION ==================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 70px; /* Space for fixed navbar */
+    /* The Diagonal Split Effect */
+    background: linear-gradient(115deg, var(--bg-gray) 50%, #000 50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px; /* MUST match the navbar max-width */
+    height: 80vh;
+    margin: 0 auto;    /* Centers the hero content */
+    align-items: center;
+    padding: 0 20px;   /* MUST match navbar padding */
+}
+
+/* Left Side Text */
+
+.hero-text {
+    flex: 1;
+    padding-left: 0; /* CHANGED: Removed the 50px padding so it aligns left */
+    color: var(--text-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2; /* Ensures text stays on top */
+}
+
+.hero-logo {
+    margin-bottom: 40px; /* Space between logo and text */
+}
+
+/* Optional: Make the text bigger like the original design */
+.hero-text h1 {
+    font-size: 5rem; /* Make name huge */
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 15px;
+}
+
+.hero-text h2 {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    color: #777; /* Gray text per design */
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.hero-socials a {
+    font-size: 2rem;
+    color: #333; /* Dark gray icons */
+    margin-right: 20px;
+    background: #ccc; /* Light gray box behind icon */
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+}
+
+.hero-socials a:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* Right Side Image */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.hero-image img {
+    max-width: 80%;
+    height: auto;
+    object-fit: cover;
+    /* Adjust this margin to position your cutout image nicely on the black background */
+    margin-top: auto; 
+}
+
+/* Dark Bottom Strip (IT Berries) */
+.hero-footer-strip {
+    background-color: var(--bg-dark);
+    color: #fff;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.strip-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 50px; /* Align with hero text */
+}
+
+.strip-content h3 {
+    font-family: var(--font-head);
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.strip-content p {
+    font-size: 0.9rem;
+    max-width: 600px;
+    color: #ccc;
+}
+
+.strip-link a {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin: 0 10px;
+    border-bottom: 1px solid transparent;
+}
+.strip-link a:hover {
+    border-bottom: 1px solid #fff;
+}
+
+/* ==================== SECTION TITLE BOX ==================== */
+.section-title {
+    text-align: center;
+    margin: 80px 0 40px 0;
+}
+
+.section-title h2 {
+    display: inline-block;
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border: 4px solid #000; /* The black box */
+    padding: 15px 40px;
+    background: transparent;
+}
+
+/* ==================== ABOUT ME SECTION ==================== */
+.about-section {
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.about-text {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.separator {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 0.9rem;
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.separator::before, .separator::after {
+    content: ""; /* Can serve as lines if needed, but text pipes | used in HTML */
+}
+
+/* About Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.service-item {
+    text-align: left;
+    padding: 20px;
+}
+
+.service-icon {
+    height: 40px;
+    margin-bottom: 20px;
+    opacity: 0.2; /* Light gray icons */
+}
+
+.service-item h3 {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.service-item p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ==================== SKILLS SECTION ==================== */
+.skills-section {
+    padding-bottom: 100px;
+}
+
+.skill-category-title {
+    font-family: var(--font-head);
+    font-weight: 800;
+    margin: 40px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.skill-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+
+.skill-box i {
+    font-size: 3rem; /* Icon size */
+    margin-bottom: 10px;
+}
+
+.skill-box span {
+    font-family: var(--font-head);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==================== PORTFOLIO SECTION ==================== */
+.portfolio-section {
+    background-color: var(--bg-gray);
+    width: 100%;
+}
+
+/* Portfolio Header with Image */
+.portfolio-header {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../images/mountains.jpg'); /* Replace with mountain image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.portfolio-header .section-title {
+    margin: 0;
+}
+.portfolio-header .section-title h2 {
+    background-color: rgba(255, 255, 255, 0.9); /* Opaque white box */
+    border: 4px solid #000;
+}
+
+/* Portfolio Filter Nav */
+.portfolio-nav {
+    background-color: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+}
+
+.portfolio-nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 0.9rem;
+    margin: 0 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.portfolio-nav button.active {
+    border-bottom: 2px solid #fff;
+}
+
+/* Portfolio Grid */
+.portfolio-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    width: 100%;
+}
+
+.portfolio-item {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover Overlay */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 0, 50, 0.9); /* Purple dark overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    padding: 20px;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1); /* Zoom effect */
+}
+
+.portfolio-overlay h3 {
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.portfolio-links a {
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 0 5px;
+    text-transform: uppercase;
+}
+
+.portfolio-footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 30px;
+}
+.portfolio-footer h3 {
+    font-family: var(--font-head);
+    font-weight: 700;
+}
+
+/* ==================== CONTACT SECTION ==================== */
+.contact-section {
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.contact-intro {
+    font-size: 0.9rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: #555;
+}
+
+.separator-small {
+    margin: 20px 0 40px 0;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+/* Form Styling */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-left: 3px solid #000; /* Left bold line */
+    border-bottom: 2px solid #000; /* Bottom line */
+    padding: 15px;
+    margin-bottom: 30px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #000;
+    outline: none;
+}
+
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: #555;
+}
+
+.form-submit {
+    text-align: center;
+    font-weight: 800;
+    font-family: var(--font-head);
+    letter-spacing: 2px;
+}
+
+.form-submit button {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 0 10px;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background-color: #111;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0 20px 0;
+}
+
+.back-to-top a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.back-to-top p {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-family: var(--font-head);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.footer-socials {
+    margin-bottom: 30px;
+}
+
+.footer-socials a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    border: 1px solid #fff;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.copyright p {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* ==================== RESPONSIVE (MOBILE) ==================== */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide nav links on mobile for now (requires JS to toggle) */
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: #000;
+        flex-direction: column;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    
+    .nav-links.nav-active {
+        display: flex;
+        transform: translateX(0%);
+    }
+
+    .burger {
+        display: block;
+    }
+
+    /* Hero Responsive */
+    .hero-section {
+        background: var(--bg-gray); /* Remove angle gradient on mobile */
+    }
+
+    .hero-container {
+        flex-direction: column;
+        padding-top: 50px;
+        height: auto;
+    }
+
+    .hero-text {
+        padding: 0 20px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    .hero-image {
+        background-color: #000; /* Black box for image on mobile */
+        width: 100%;
+        align-items: flex-end;
+    }
+
+    .services-grid, 
+    .portfolio-container {
+        grid-template-columns: 1fr; /* Stack vertically */
+    }
+}
+
