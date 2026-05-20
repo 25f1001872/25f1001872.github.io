@@ -680,3 +680,72 @@ ul {
     }
 }
 
+/* ==================== LOGO TEXT (until image logo is ready) ==================== */
+.logo-text {
+    color: #fff;
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+/* ==================== HERO IMAGE PLACEHOLDER ==================== */
+.hero-image-placeholder {
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255,255,255,0.05);
+    border: 2px dashed rgba(255,255,255,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.hero-image-placeholder i {
+    font-size: 8rem;
+    color: rgba(255,255,255,0.2);
+}
+
+/* ==================== ABOUT - FA ICON SERVICES ==================== */
+.service-icon-fa {
+    margin-bottom: 20px;
+}
+
+.service-icon-fa i {
+    font-size: 2.5rem;
+    opacity: 0.25;
+    color: #000;
+}
+
+/* ==================== PORTFOLIO COMING SOON ==================== */
+.portfolio-coming-soon {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px 20px;
+    color: #777;
+}
+
+.portfolio-coming-soon i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.portfolio-coming-soon h3 {
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.portfolio-coming-soon p {
+    font-size: 0.9rem;
+}
+
+/* ==================== NAVBAR SCROLLED STATE ==================== */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    height: 60px;
+    transition: all 0.3s ease;
+}
